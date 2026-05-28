@@ -1,0 +1,1 @@
+WC_SEEKER bottlenecked because: routing_criticality=1.0 + jig_fixture_prep_days=30.0 + rework_rate_pct=0.05 + operation_sequence=5.0

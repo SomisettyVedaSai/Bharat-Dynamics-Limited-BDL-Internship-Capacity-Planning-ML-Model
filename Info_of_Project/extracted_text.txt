@@ -1,0 +1,10 @@
+BDL — Capacity Planning ML Model
+Why BDL is different from a normal factory: BDL produces guided missiles, ATGMs, torpedoes, and underwater weapons — low volume (tens to hundreds of units per order), extremely high complexity (300–1000+ sub-assemblies per missile), long lead times (months to years), strict AS9100D quality gates, and defence delivery commitments to the Indian Army/Navy/Air Force.
+BDL-specific manufacturing realities
+Orders are government-contracted with fixed delivery schedules. Late delivery = defence readiness risk, not just a business penalty.
+Each missile system (Akash, Milan-2T, Konkurs, Nag, Amogha-III, Astra, Heavyweight Torpedo) has its own process sheet with unique operation sequences across multiple work centers.
+4 active manufacturing units (Hyderabad, Bhanur, Ibrahimpatnam, Visakhapatnam) + 2 new units coming in FY27 — each with different work center configurations.
+AS9100D certification mandates traceability, First Article Inspection (FAI), quality gate clearance times, and zero-defect targets — these must be modelled as capacity constraints.
+BDL's order book is ₹26,000 crore with ₹15,000 crore more expected in FY27. Capacity planning directly determines whether these contracts can be executed on time.
+Specialized work centers (Seeker assembly, Warhead production, Propulsion, Electronics/PCB/SMT, Final integration, Proof testing) cannot be substituted — a bottleneck at Seeker assembly stalls the entire missile line.
+Data is defence-sensitive. All ML workloads must run on-premise on BDL's internal servers. No cloud. No external APIs in production.

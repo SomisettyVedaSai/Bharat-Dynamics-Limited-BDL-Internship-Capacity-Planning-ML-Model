@@ -1,0 +1,39 @@
+{% if predictions_history %}
+    {% for item in predictions_history %}
+    <tr id="pred-row-{{ item._id }}">
+        <td>{{ item.timestamp }}</td>
+        <td><strong>{{ item.record.weapon_system }}</strong></td>
+        <td>{{ item.record.work_center_code }}</td>
+        <td>{{ item.record.planning_period_qty }}</td>
+        <td>{{ item.prediction.required_capacity_hrs }} hrs</td>
+        <td>{{ (item.prediction.utilization_rate * 100) | round(1) }}%</td>
+        <td>
+            {% if item.prediction.delivery_risk_flag == 1 %}
+            <span class="badge badge-red">HIGH RISK</span>
+            {% else %}
+            <span class="badge badge-green">OK</span>
+            {% endif %}
+        </td>
+        <td>
+            {% if item.prediction.overload_severity == 'Critical' %}
+            <span class="badge badge-red">CRITICAL</span>
+            {% elif item.prediction.overload_severity == 'Warning' %}
+            <span class="badge badge-orange">WARNING</span>
+            {% else %}
+            <span class="badge badge-green">OK</span>
+            {% endif %}
+        </td>
+        <td>
+            <div style="display: flex; gap: 0.5rem; justify-content: center; align-items: center;">
+                <button onclick='loadPrediction({{ item.record | tojson | safe }})' class="badge" style="background-color: var(--primary); color: white; border: none; cursor: pointer; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">LOAD</button>
+                <a href="/print_report/{{ item._id }}" target="_blank" class="badge" style="background-color: var(--accent-green); color: white; text-decoration: none; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600; display: inline-block;">PRINT</a>
+                <button onclick='deletePrediction("{{ item._id }}")' class="badge" style="background-color: var(--accent-red); color: white; border: none; cursor: pointer; padding: 0.25rem 0.6rem; border-radius: 4px; font-weight: 600;">DELETE</button>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <td colspan="9" style="text-align: center; color: var(--text-secondary); padding: 2rem;">No saved predictions found for this account. Runs from the form are automatically saved.</td>
+    </tr>
+{% endif %}

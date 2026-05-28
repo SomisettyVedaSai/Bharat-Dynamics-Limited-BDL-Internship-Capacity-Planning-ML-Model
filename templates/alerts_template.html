@@ -1,0 +1,20 @@
+{% if alerts_list %}
+    {% for alert in alerts_list %}
+    <div class="alert-row">
+        <div class="alert-desc">
+            <strong>{{ alert.weapon_system }}</strong> at <strong>{{ alert.work_center_code }}</strong> ({{ alert.manufacturing_unit }} unit)
+            <div class="alert-meta">
+                Qty: {{ alert.planning_period_qty }} | Days to Delivery: {{ alert.contracted_delivery_days }} days | Machine Age: {{ alert.machine_age_years }} yrs
+            </div>
+        </div>
+        <span class="alert-value-badge">
+            {{ (alert.utilization_rate * 100) | int }}% Util
+        </span>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="alerts-placeholder" style="text-align: center; color: var(--text-secondary); padding: 1.5rem; font-size: 0.85rem; font-style: italic; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background-color: rgba(16, 185, 129, 0.02); border: 1px dashed var(--border-color); border-radius: 6px; width: 100%;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        All assembly lines and test centers operating within normal capacity thresholds. No critical overloads.
+    </div>
+{% endif %}

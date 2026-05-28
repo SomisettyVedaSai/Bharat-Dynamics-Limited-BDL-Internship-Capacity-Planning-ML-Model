@@ -1,0 +1,85 @@
+=== CAPACITY PLANNING ENGINE EVALUATION REPORT ===
+
+=== MODEL A EVALUATION (required_capacity_hrs) ===
+Overall R²: 0.9936
+Overall RMSE: 22.5827
+Overall MAE: 8.2857
+
+Model A Performance by Weapon System:
+  Akash      -> R²: 0.9862 | RMSE:   32.84 hrs | MAE:   10.19 hrs
+  Amogha3    -> R²: 0.9938 | RMSE:   23.72 hrs | MAE:    9.16 hrs
+  Astra      -> R²: 0.9957 | RMSE:   21.74 hrs | MAE:    9.57 hrs
+  CMDS       -> R²: 0.9931 | RMSE:   22.29 hrs | MAE:   11.55 hrs
+  HELINA     -> R²: 0.9973 | RMSE:   11.25 hrs | MAE:    6.32 hrs
+  HWT        -> R²: 0.9922 | RMSE:   18.43 hrs | MAE:    8.49 hrs
+  Konkurs    -> R²: 0.9962 | RMSE:   16.98 hrs | MAE:    6.73 hrs
+  LWT        -> R²: 0.9982 | RMSE:    5.64 hrs | MAE:    3.24 hrs
+  Milan2T    -> R²: 0.9959 | RMSE:   18.10 hrs | MAE:    7.31 hrs
+  Nag        -> R²: 0.9933 | RMSE:   28.12 hrs | MAE:   11.56 hrs
+
+=== MODEL B EVALUATION (utilization_rate) ===
+Overall R²: 0.9998
+Overall RMSE: 0.0082
+Overall MAE: 0.0028
+
+Model B Performance by Weapon System:
+  Akash      -> R²: 0.9997 | RMSE:  0.0097 | MAE:  0.0033
+  Amogha3    -> R²: 0.9999 | RMSE:  0.0040 | MAE:  0.0021
+  Astra      -> R²: 0.9998 | RMSE:  0.0085 | MAE:  0.0034
+  CMDS       -> R²: 0.9999 | RMSE:  0.0062 | MAE:  0.0034
+  HELINA     -> R²: 0.9999 | RMSE:  0.0061 | MAE:  0.0026
+  HWT        -> R²: 0.9976 | RMSE:  0.0204 | MAE:  0.0082
+  Konkurs    -> R²: 0.9999 | RMSE:  0.0042 | MAE:  0.0018
+  LWT        -> R²: 0.9983 | RMSE:  0.0163 | MAE:  0.0071
+  Milan2T    -> R²: 1.0000 | RMSE:  0.0036 | MAE:  0.0015
+  Nag        -> R²: 0.9995 | RMSE:  0.0126 | MAE:  0.0045
+
+=== MODEL C EVALUATION (bottleneck_flag) ===
+Overall F1-macro: 0.9062
+Overall Recall (Bottlenecks): 0.8320
+Overall Precision (Bottlenecks): 0.9189
+
+Model C Performance by Weapon System:
+  Akash      -> F1-macro: 0.8937 | Recall: 0.8182 | Precision: 0.9076
+  Amogha3    -> F1-macro: 0.9508 | Recall: 0.9167 | Precision: 0.9565
+  Astra      -> F1-macro: 0.9337 | Recall: 0.8793 | Precision: 0.9623
+  CMDS       -> F1-macro: 0.9328 | Recall: 0.8333 | Precision: 1.0000
+  HELINA     -> F1-macro: 0.8750 | Recall: 0.7500 | Precision: 0.9375
+  HWT        -> F1-macro: 0.9543 | Recall: 0.8667 | Precision: 1.0000
+  Konkurs    -> F1-macro: 0.9182 | Recall: 0.8547 | Precision: 0.9259
+  LWT        -> F1-macro: 0.8110 | Recall: 0.5714 | Precision: 0.8889
+  Milan2T    -> F1-macro: 0.8894 | Recall: 0.8068 | Precision: 0.8931
+  Nag        -> F1-macro: 0.9305 | Recall: 0.9231 | Precision: 0.9000
+
+=== MODEL D EVALUATION (delivery_risk_flag) ===
+Overall F1-macro: 0.9354
+Overall Recall (Risk): 0.7889
+Overall Precision (Risk): 0.9861
+
+Model D Performance by Weapon System:
+  Akash      -> F1-macro: 0.9865 | Recall: 0.9500 | Precision: 1.0000
+  Amogha3    -> F1-macro: 0.7341 | Recall: 0.3333 | Precision: 1.0000
+  Astra      -> F1-macro: 0.9508 | Recall: 0.8333 | Precision: 1.0000
+  CMDS       -> F1-macro: 1.0000 | Recall: 1.0000 | Precision: 1.0000
+  HELINA     -> F1-macro: 1.0000 | Recall: 1.0000 | Precision: 1.0000
+  HWT        -> F1-macro: 0.8959 | Recall: 0.6667 | Precision: 1.0000
+  Konkurs    -> F1-macro: 0.8773 | Recall: 0.6154 | Precision: 1.0000
+  LWT        -> F1-macro: 1.0000 | Recall: 1.0000 | Precision: 1.0000
+  Milan2T    -> F1-macro: 0.9601 | Recall: 0.8571 | Precision: 1.0000
+  Nag        -> F1-macro: 0.8473 | Recall: 0.6250 | Precision: 0.8333
+
+=== MODEL E EVALUATION (overload_severity) ===
+Overall F1-macro: 0.8763
+Overall Accuracy: 0.9094
+
+Model E Performance by Weapon System:
+  Akash      -> F1-macro: 0.8719 | Accuracy: 0.9041
+  Amogha3    -> F1-macro: 0.8564 | Accuracy: 0.9104
+  Astra      -> F1-macro: 0.8494 | Accuracy: 0.8951
+  CMDS       -> F1-macro: 0.9403 | Accuracy: 0.9412
+  HELINA     -> F1-macro: 0.8851 | Accuracy: 0.9074
+  HWT        -> F1-macro: 0.8432 | Accuracy: 0.8750
+  Konkurs    -> F1-macro: 0.8891 | Accuracy: 0.9231
+  LWT        -> F1-macro: 0.8604 | Accuracy: 0.8983
+  Milan2T    -> F1-macro: 0.8671 | Accuracy: 0.9125
+  Nag        -> F1-macro: 0.8774 | Accuracy: 0.8991
