@@ -178,7 +178,7 @@ def login_required(f):
     return decorated_function
 
 # Set Plotly template
-pio.templates.default = "plotly_dark"
+pio.templates.default = "plotly_white"
 
 # Path to the data
 DATA_PATH = os.path.join('data', 'bdl_production_planning_data.csv')

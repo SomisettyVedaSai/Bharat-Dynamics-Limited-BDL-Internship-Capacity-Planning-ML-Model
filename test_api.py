@@ -17,7 +17,7 @@ def test_api():
     
     # Send request
     req = urllib.request.Request(
-        'http://127.0.0.1:5000/predict', 
+        'http://127.0.0.1:5050/predict', 
         data=data, 
         headers={'Content-Type': 'application/json'}
     )
