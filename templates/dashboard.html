@@ -1176,7 +1176,6 @@
                 </div>
                 
                 <div class="output-body" id="inline-prediction-body">
-                    {% if prediction %}
                     <div class="output-grid">
                         
                         <!-- Left Sub-Panel: Explicit Input Summary -->
@@ -1185,39 +1184,39 @@
                             <div class="config-list">
                                 <div class="config-item">
                                     <span class="config-label">Weapon System</span>
-                                    <span class="config-val" id="out-config-weapon">{{ prediction.validated_record.weapon_system }}</span>
+                                    <span class="config-val" id="out-config-weapon">{{ prediction.validated_record.weapon_system if prediction else '' }}</span>
                                 </div>
                                 <div class="config-item">
                                     <span class="config-label">Work Center Code</span>
-                                    <span class="config-val" id="out-config-wc">{{ prediction.validated_record.work_center_code }}</span>
+                                    <span class="config-val" id="out-config-wc">{{ prediction.validated_record.work_center_code if prediction else '' }}</span>
                                 </div>
                                 <div class="config-item">
                                     <span class="config-label">Manufacturing Unit</span>
-                                    <span class="config-val" id="out-config-unit">{{ prediction.validated_record.manufacturing_unit }}</span>
+                                    <span class="config-val" id="out-config-unit">{{ prediction.validated_record.manufacturing_unit if prediction else '' }}</span>
                                 </div>
                                 <div class="config-item">
                                     <span class="config-label">Planning Qty</span>
-                                    <span class="config-val" id="out-config-qty">{{ prediction.validated_record.planning_period_qty }} units</span>
+                                    <span class="config-val" id="out-config-qty">{% if prediction %}{{ prediction.validated_record.planning_period_qty }} units{% endif %}</span>
                                 </div>
                                 <div class="config-item">
                                     <span class="config-label">Shift Configuration</span>
-                                    <span class="config-val" id="out-config-shift">{{ prediction.validated_record.shift_pattern }} Shift</span>
+                                    <span class="config-val" id="out-config-shift">{% if prediction %}{{ prediction.validated_record.shift_pattern }} Shift{% endif %}</span>
                                 </div>
                                 <div class="config-item">
                                     <span class="config-label">Parallel Lines Count</span>
-                                    <span class="config-val" id="out-config-lines">{{ prediction.validated_record.num_parallel_lines }}</span>
+                                    <span class="config-val" id="out-config-lines">{{ prediction.validated_record.num_parallel_lines if prediction else '' }}</span>
                                 </div>
                                 <div class="config-item">
                                     <span class="config-label">Working Days</span>
-                                    <span class="config-val" id="out-config-days">{{ prediction.validated_record.working_days_in_period }} days</span>
+                                    <span class="config-val" id="out-config-days">{% if prediction %}{{ prediction.validated_record.working_days_in_period }} days{% endif %}</span>
                                 </div>
                                 <div class="config-item">
                                     <span class="config-label">Machine OEE</span>
-                                    <span class="config-val" id="out-config-oee">{{ (prediction.validated_record.machine_oee_pct * 100) | int }}%</span>
+                                    <span class="config-val" id="out-config-oee">{% if prediction %}{{ (prediction.validated_record.machine_oee_pct * 100) | int }}%{% endif %}</span>
                                 </div>
                                 <div class="config-item">
                                     <span class="config-label">SLA Delivery Window</span>
-                                    <span class="config-val" id="out-config-delivery">{{ prediction.validated_record.contracted_delivery_days }} days</span>
+                                    <span class="config-val" id="out-config-delivery">{% if prediction %}{{ prediction.validated_record.contracted_delivery_days }} days{% endif %}</span>
                                 </div>
                             </div>
                         </div>
@@ -1226,34 +1225,36 @@
                         <div class="metrics-panel-v2">
                             <div class="metric-box">
                                 <span class="metric-name">Required Capacity</span>
-                                <span class="metric-value" id="out-metric-req-hrs">{{ prediction.required_capacity_hrs }} Hrs</span>
+                                <span class="metric-value" id="out-metric-req-hrs">{% if prediction %}{{ prediction.required_capacity_hrs }} Hrs{% endif %}</span>
                             </div>
                             <div class="metric-box">
                                 <span class="metric-name">Utilization Rate</span>
-                                <span class="metric-value" id="out-metric-util">{{ (prediction.utilization_rate * 100) | round(2) }}%</span>
+                                <span class="metric-value" id="out-metric-util">{% if prediction %}{{ (prediction.utilization_rate * 100) | round(2) }}%{% endif %}</span>
                             </div>
                             <div class="metric-box">
                                 <span class="metric-name">Bottleneck Status</span>
-                                <span class="metric-badge {% if prediction.bottleneck_flag == 1 %}badge-critical{% else %}badge-ok{% endif %}" style="margin-top: 0.5rem;" id="out-badge-bottleneck">
-                                    {{ 'BOTTLENECK' if prediction.bottleneck_flag == 1 else 'NO BOTTLENECK' }}
+                                <span class="metric-badge {% if prediction and prediction.bottleneck_flag == 1 %}badge-critical{% else %}badge-ok{% endif %}" style="margin-top: 0.5rem;" id="out-badge-bottleneck">
+                                    {{ 'BOTTLENECK' if prediction and prediction.bottleneck_flag == 1 else 'NO BOTTLENECK' }}
                                 </span>
                             </div>
                             <div class="metric-box">
                                 <span class="metric-name">Delivery SLA Risk</span>
-                                <span class="metric-badge {% if prediction.delivery_risk_flag == 1 %}badge-critical{% else %}badge-ok{% endif %}" style="margin-top: 0.5rem;" id="out-badge-risk">
-                                    {{ 'HIGH RISK' if prediction.delivery_risk_flag == 1 else 'ON SCHEDULE' }}
+                                <span class="metric-badge {% if prediction and prediction.delivery_risk_flag == 1 %}badge-critical{% else %}badge-ok{% endif %}" style="margin-top: 0.5rem;" id="out-badge-risk">
+                                    {{ 'HIGH RISK' if prediction and prediction.delivery_risk_flag == 1 else 'ON SCHEDULE' }}
                                 </span>
                             </div>
                             <div class="metric-box full-width">
                                 <span class="metric-name">Overload Severity</span>
                                 <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.4rem;">
-                                    <span class="metric-badge {% if prediction.overload_severity == 'Critical' %}badge-critical{% elif prediction.overload_severity == 'Warning' %}badge-warning{% else %}badge-ok{% endif %}" id="out-badge-severity">
-                                        {{ prediction.overload_severity }}
+                                    <span class="metric-badge {% if prediction and prediction.overload_severity == 'Critical' %}badge-critical{% elif prediction and prediction.overload_severity == 'Warning' %}badge-warning{% else %}badge-ok{% endif %}" id="out-badge-severity">
+                                        {{ prediction.overload_severity if prediction else '' }}
                                     </span>
                                     <span style="font-size: 0.65rem; color: var(--text-secondary);" id="out-detail-probs">
+                                        {% if prediction %}
                                         OK: {{ (prediction.severity_probs.OK * 100) | round(1) }}% | 
                                         Warn: {{ (prediction.severity_probs.Warning * 100) | round(1) }}% | 
                                         Crit: {{ (prediction.severity_probs.Critical * 100) | round(1) }}%
+                                        {% endif %}
                                     </span>
                                 </div>
                             </div>
@@ -1262,11 +1263,11 @@
                             <div class="metric-box full-width" style="border: none; background: transparent; padding: 0;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
                                     <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600;">Capacity Utilization Rate</span>
-                                    <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);" id="out-bar-label">{{ (prediction.utilization_rate * 100) | round(2) }}%</span>
+                                    <span style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);" id="out-bar-label">{% if prediction %}{{ (prediction.utilization_rate * 100) | round(2) }}%{% endif %}</span>
                                 </div>
-                                <div style="background-color: #0d121f; height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid var(--border-color);">
-                                    {% set util_pct = prediction.utilization_rate * 100 %}
-                                    {% if prediction.utilization_rate <= 0.75 %}
+                                <div style="background-color: #f1f5f9; height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid var(--border-color);">
+                                    {% set util_pct = (prediction.utilization_rate * 100) if prediction else 0 %}
+                                    {% if not prediction or prediction.utilization_rate <= 0.75 %}
                                         {% set bar_color = 'var(--accent-green)' %}
                                     {% elif prediction.utilization_rate <= 0.90 %}
                                         {% set bar_color = 'var(--accent-orange)' %}
@@ -1316,7 +1317,6 @@
                             </ul>
                         </div>
                     </div>
-                    {% endif %}
                 </div>
             </div>
 
